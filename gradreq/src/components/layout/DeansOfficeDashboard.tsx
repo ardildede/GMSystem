@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import {
   Box,
@@ -48,8 +48,13 @@ const DeansOfficeDashboard = ({ children }: DeansOfficeDashboardProps) => {
 
   const pathname = window.location.pathname;
 
+  useEffect(() => {
+    if (pathname === '/deans-office') {
+      navigate('/deans-office/faculty-ranking');
+    }
+  }, [pathname, navigate]);
+
   const navItems = [
-    { path: '/deans-office', icon: <DashboardIcon />, label: 'Dashboard', exact: true },
     { path: '/deans-office/faculty-ranking', icon: <FormatListNumberedIcon />, label: 'Faculty Ranking' },
   ];
 

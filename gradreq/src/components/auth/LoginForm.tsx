@@ -29,6 +29,8 @@ const STUDENT_EMAIL = "student@example.com";
 const STUDENT_PASSWORD = "student123";
 const SECRETARY_EMAIL = "secretary@example.com";
 const SECRETARY_PASSWORD = "secretary123";
+const DEANS_OFFICE_EMAIL = "deansoffice@example.com";
+const DEANS_OFFICE_PASSWORD = "deansoffice123";
 
 const LoginForm = ({ onForgotPasswordClick, onRegisterClick }: LoginFormProps) => {
   const [email, setEmail] = useState('');
@@ -59,6 +61,9 @@ const LoginForm = ({ onForgotPasswordClick, onRegisterClick }: LoginFormProps) =
       } else if (email === SECRETARY_EMAIL && password === SECRETARY_PASSWORD) {
         await login(email, password);
         navigate('/secretary'); // Navigate to secretary dashboard
+      } else if (email === DEANS_OFFICE_EMAIL && password === DEANS_OFFICE_PASSWORD) {
+        await login(email, password);
+        navigate('/deans-office'); // Navigate to Dean's Office dashboard
       } else {
         // For demo purposes, throw an error for non-student credentials
         throw new Error('Invalid credentials');
@@ -199,4 +204,4 @@ const LoginForm = ({ onForgotPasswordClick, onRegisterClick }: LoginFormProps) =
   );
 };
 
-export default LoginForm; 
+export default LoginForm;

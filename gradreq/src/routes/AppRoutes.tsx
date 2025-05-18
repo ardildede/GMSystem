@@ -21,6 +21,10 @@ const SecretaryTranscriptPage = lazy(() => import('../pages/SecretaryTranscriptP
 const SecretaryRankingPage = lazy(() => import('../pages/SecretaryRankingPage'));
 const SecretaryNotificationsPage = lazy(() => import('../pages/SecretaryNotificationsPage'));
 
+// Dean's Office pages
+const DeansOfficeDashboardPage = lazy(() => import('../pages/DeansOfficeDashboardPage'));
+const FacultyRankingPage = lazy(() => import('../pages/deansoffice/FacultyRankingPage'));
+
 // Loading component - positioned fixed to cover the whole screen
 const LoadingComponent = () => (
   <Box
@@ -65,6 +69,10 @@ const DashboardRouter = () => {
   
   if (user.role === 'secretary') {
     return <Navigate to="/secretary" replace />;
+  }
+
+  if (user.role === 'deans_office') {
+    return <Navigate to="/deans-office" replace />;
   }
   
   // Later we'll add other roles
@@ -142,6 +150,13 @@ const AppRoutes = () => {
           path="/secretary/notifications" 
           element={<ProtectedRoute element={<SecretaryNotificationsPage />} />} 
         />
+
+        {/* Dean's Office Dashboard routes */}
+        <Route path="/deans-office" element={<ProtectedRoute element={<DeansOfficeDashboardPage />} />} />
+        <Route
+          path="/deans-office/faculty-ranking"
+          element={<ProtectedRoute element={<FacultyRankingPage />} />}
+        />
         
         {/* Redirect root to appropriate dashboard or login */}
         <Route path="/" element={<DashboardRouter />} />
@@ -153,4 +168,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes; 
+export default AppRoutes;

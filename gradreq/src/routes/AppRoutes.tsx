@@ -22,6 +22,13 @@ const TranscriptProcessingPage = lazy(() => import('../features/secretary/pages/
 const DepartmentRankingPage = lazy(() => import('../features/secretary/pages/DepartmentRankingPage'));
 const NotificationsPage = lazy(() => import('../features/secretary/pages/NotificationsPage'));
 
+// Advisor pages
+const AdvisorDashboard = lazy(() => import('../features/advisor/pages/AdvisorDashboardPage'));
+const AdvisorDashboardLayout = lazy(() => import('../features/advisor/layout/AdvisorDashboardLayout'));
+const AdvisorStudentsPage = lazy(() => import('../features/advisor/pages/StudentsPage'));
+const AdvisorTranscriptsPage = lazy(() => import('../features/advisor/pages/TranscriptsPage'));
+const AdvisorPetitionPage = lazy(() => import('../features/advisor/pages/PetitionPage'));
+
 // Loading component - positioned fixed to cover the whole screen
 const LoadingComponent = () => (
   <Box
@@ -66,6 +73,10 @@ const DashboardRouter = () => {
   
   if (user.role === 'secretary') {
     return <Navigate to="/secretary" replace />;
+  }
+  
+  if (user.role === 'advisor') {
+    return <Navigate to="/advisor" replace />;
   }
   
   // Later we'll add other roles
@@ -142,6 +153,45 @@ const AppRoutes = () => {
         <Route 
           path="/secretary/notifications" 
           element={<ProtectedRoute element={<NotificationsPage />} />} 
+        />
+
+        {/* Advisor Dashboard routes */}
+        <Route path="/advisor" element={<ProtectedRoute element={<AdvisorDashboard />} />} />
+        <Route 
+          path="/advisor/students" 
+          element={
+            <ProtectedRoute 
+              element={
+                <AdvisorDashboardLayout>
+                  <AdvisorStudentsPage />
+                </AdvisorDashboardLayout>
+              } 
+            />
+          } 
+        />
+        <Route 
+          path="/advisor/transcripts" 
+          element={
+            <ProtectedRoute 
+              element={
+                <AdvisorDashboardLayout>
+                  <AdvisorTranscriptsPage />
+                </AdvisorDashboardLayout>
+              } 
+            />
+          } 
+        />
+        <Route 
+          path="/advisor/petition" 
+          element={
+            <ProtectedRoute 
+              element={
+                <AdvisorDashboardLayout>
+                  <AdvisorPetitionPage />
+                </AdvisorDashboardLayout>
+              } 
+            />
+          } 
         />
         
         {/* Redirect root to appropriate dashboard or login */}
